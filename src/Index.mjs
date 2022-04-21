@@ -2,6 +2,8 @@ import express from "express";
 const app = express();
 const PORT = 3000;
 
+//http://Localhost:3000/
+
 const tasks = [
     {
         id: 0,
@@ -17,14 +19,21 @@ const tasks = [
 
 app.use(express.json())
 
+// req o request = Recibo respuesta;    Res o response = Recibo respesta. 
+
 app.get("/api/v0.0/tasks/",(request, response)=>{
     response.json(tasks)
 })
+
+// sendStatus = cuando recibo la respuesta requerida. 
 
 app.post("/api/v0.0/task/",(request, response)=>{
     tasks.push(request.body);
     response.sendStatus(201);
 })
+
+/**  findIndex = Devuelve el índice del primer elemento de un array que cumpla con la función de prueba 
+ * proporcionada. En caso contrario devuelve -1.*/
 
 app.put("/api/v0.0/task/",(request, response)=>{
     const updatedTask = request.body;
