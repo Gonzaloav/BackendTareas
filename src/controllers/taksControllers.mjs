@@ -1,18 +1,32 @@
 import { tasks } from "../models/tasksModels.mjs"
 
 
-// req o request = Recibo respuesta;    Res o response = Recibo respesta. 
+/**  req o request = Recibo respuesta;    Res o response = Recibo respesta. 
+* SendStatus = Establece el estado y lo envía a la cliente. 
+* Cuando recibo la respuesta requerida.
+* try =  define un bloque de código para ejecutar (para probar.)
+* Catch = Define un bloque de código para manejar cualquier error. */
 
 export function getTaskController (request, response) {
-    response.json(tasks)
+    try{
+         response.json(tasks);
+    } catch (err) {
+        console.error(err);
+        response.sendStatus (500).send ('Error del servidor');
+    }
 }
 
-// sendStatus = cuando recibo la respuesta requerida.
 
 export function postTaskController (request, response) {
-    tasks.push(request.body);
-    response.sendStatus(201);
-}
+    try {
+            tasks.push(request.body);
+            response.sendStatus(201);
+    } catch (err) {
+            console.error(err);
+            response.sendStatus (500); 
+    }
+} 
+
 
 /**  findIndex = Devuelve el índice del primer elemento de un array que cumpla 
  * con la función de prueba proporcionada. En caso contrario devuelve -1.*/
