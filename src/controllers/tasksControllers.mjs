@@ -9,7 +9,7 @@ import { tasks } from "../models/tasksModels.mjs"
 
 export function getTaskController (request, response) {
     try{
-         response.json(tasks);
+         response.json(tasks).send ('Hola Mundo');
     } catch (err) {
         console.error(err);
         response.sendStatus (500).send ('Error del servidor');
@@ -20,10 +20,10 @@ export function getTaskController (request, response) {
 export function postTaskController (request, response) {
     try {
             tasks.push(request.body);
-            response.sendStatus(201);
+            response.sendStatus(201).send ('Hola Mundo');
     } catch (err) {
             console.error(err);
-            response.sendStatus (500); 
+            response.sendStatus (500).send ('Error del servidor'); 
     }
 } 
 
@@ -37,7 +37,7 @@ export function putTaskController (request, response) {
         item => item.id === updatedTask.id
     )
     tasks[oldTaskIdx] = updatedTask;
-    response.sendStatus(200);
+    response.sendStatus(200).send ('Hola Mundo');
 }
 
 export function deleteTaskController (request, response) {
@@ -46,5 +46,5 @@ export function deleteTaskController (request, response) {
         item => item.id === updatedTask.id
     )
     tasks.splice(oldTaskIdx,1);
-    response.sendStatus(200)
+    response.sendStatus(200).send ('Hola Mundo');
 }
