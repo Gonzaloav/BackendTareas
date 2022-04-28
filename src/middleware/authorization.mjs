@@ -8,3 +8,4 @@ export function authorizedMiddleware( request, response, next ){
         response.sendStatus(401)
     }
 }
+
