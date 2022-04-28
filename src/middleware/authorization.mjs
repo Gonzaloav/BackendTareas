@@ -1,14 +1,22 @@
 import { users } from "../models/usersModels.mjs";
 
+/**  .split = didive un objeto tipo string en un array de cadenas mediante la separación
+ de la cadena en subcadenas. */
+
 function decodeAuthBasic(headerContent) {
     try {
         const [method, token ] = headerContent.split (" ");
         const tokenString = atob (token);
-    }
-    
+        const [ username, password ] = tokenString.split(":");
+        return { method, username, password }
+    } catch (error) {
+        throw "Malformed authentication";
+    }  
 }
 
-
+/** .find = Devuelve el valor del primer elemento del array que cumple la función de 
+            prueba proporcionada. 
+ * .throw = Define un error personalizado. Yo marco el error.*/
 
 export function authMieddleware(request, response, next) {
     try{
