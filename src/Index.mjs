@@ -5,13 +5,9 @@ import { requestLog } from "./middleware/requestsLog.mjs";
 import { deleteTaskController, getTaskController, postTaskController, 
          putTaskController } from "./controllers/tasksControllers.mjs";
 
-// sustituye app por express.get(...) o express.post(...)
+const app = express(); // sustituye app por express.get(...) o express.post(...)
 
-const app = express();
-
-// sustituye PORT por 3000
-
-const PORT = 3000;
+const PORT = 3000;// sustituye PORT por 3000
 
 //  http://Localhost:3000/api/v0.0/tasks
 
@@ -22,6 +18,7 @@ const PATH_PREFIX = "http://Localhost:3000/api/v0.0/";
 // express.json no es necesario en GET 
 
 const jsonParser = (express.json())
+
 
 app.post (PATH_PREFIX + "/users/", jsonParser, postTaskController);
 
