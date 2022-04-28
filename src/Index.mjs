@@ -1,7 +1,7 @@
 import express, { application } from "express";
 import { authorizedMiddleware } from "./middleware/authorization.mjs";
 import {postUsersControllers} from "./controllers/UsersControllers.mjs";
-import { requestLog } from "./middleware/requestsLog.mjs";
+import { requestLog, bodyLog } from "./middleware/requestsLog.mjs";
 import { deleteTaskController, getTaskController, postTaskController, 
          putTaskController } from "./controllers/tasksControllers.mjs";
 
@@ -9,15 +9,17 @@ const app = express(); // sustituye app por express.get(...) o express.post(...)
 
 const PORT = 3000;// sustituye PORT por 3000
 
-//  http://Localhost:3000/api/v0.0/tasks
+
+                        //  http://Localhost:3000/api/v0.0/tasks
+
 
 // El url pasa a llamarse Path_Prefix para mayor comodidad.
 
 const PATH_PREFIX = "http://Localhost:3000/api/v0.0/";
 
-// express.json no es necesario en GET 
 
-const jsonParser = (express.json())
+try {
+const jsonParser = (express.json())  // express.json no es necesario en GET 
 
 
 app.post (PATH_PREFIX + "/users/", jsonParser, postTaskController);
@@ -52,4 +54,8 @@ app.delete("/api/v0.0/task/",jsonParser, deleteTaskController)
 
 app.listen(PORT,()=>{
     console.log("Express running...");
-})
+});
+
+} catch (err) {
+    console.error (err);
+}
