@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Gonzaloav/BackendTareas#readme",
   "dependencies": {
-    "jsonschema": "^1.4.0"
+    "jsonschema": "^1.4.0",
+    "sqlite3": "^5.0.6"
   }
 }
