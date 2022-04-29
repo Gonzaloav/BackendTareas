@@ -4,7 +4,7 @@ const db = new sqlite3.Database('./tasks.db', (err) => {
     if (err) {
         console.error(err.message);
     }
-    console.log('Connected to the chat database.');
+    console.log('Conencta el proyecto de tareas con la base de datos');
 });
 
 db.run(`
