@@ -1,13 +1,28 @@
 import { tasks } from "../models/tasksModels.mjs"
 
-
 /**  req o request = Recibo respuesta;    Res o response = Recibo respesta. 
 * SendStatus = Establece el estado y lo envía a la cliente. 
-* Cuando recibo la respuesta requerida.
+               Cuando recibo la respuesta requerida.
 * try =  define un bloque de código para ejecutar (para probar.)
-* Catch = Define un bloque de código para manejar cualquier error. */
+* Catch = Define un bloque de código para manejar cualquier error. 
+* .find = Devuelve el valor del primer elemento del array que cumple la función 
+          de prueba proporcionada. 
+* parseInt = Convierte un argumento de tipo cadena y devuelve un entero de la 
+             base especificada.*/
 
-export function getTaskController (request, response) {
+export function getOneTaskController(request, response) {
+    try {
+        const task = tasks.find (
+          item => item.id === parseInt (request.params.id)  
+        )
+        if ( task ) response.json (task)
+        else response.sendStatus (404);
+    } catch (err) {
+        response.sendStatus (400);
+    }
+}
+
+export function getAllTaskController (request, response) {
     try{
          response.json(tasks).send ('Hola Mundo');
     } catch (err) {
@@ -16,10 +31,11 @@ export function getTaskController (request, response) {
     }
 }
 
+/** El id no lo tenemos. Lo creamos en el momento ( id: Date.now) */
 
 export function postTaskController (request, response) {
     try {
-            tasks.push(request.body);
+            tasks.push({...request.body, id: Date.now()});
             response.sendStatus(201).send ('Hola Mundo');
     } catch (err) {
             console.error(err);
@@ -27,9 +43,8 @@ export function postTaskController (request, response) {
     }
 } 
 
-
-/**  findIndex = Devuelve el índice del primer elemento de un array que cumpla 
- * con la función de prueba proporcionada. En caso contrario devuelve -1.*/
+/** findIndex = Devuelve el índice del primer elemento de un array que cumpla  con 
+              la función de prueba proporcionada. En caso contrario devuelve -1.*/
 
 export function putTaskController (request, response) {
     const updatedTask = request.body;

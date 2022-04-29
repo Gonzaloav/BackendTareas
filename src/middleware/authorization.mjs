@@ -3,7 +3,7 @@ import { users } from "../models/usersModels.mjs";
 /**  .split = didive un objeto tipo string en un array de cadenas mediante la 
               separación de la cadena en subcadenas. */
 
-function decodeAuthBasic(headerContent) {
+function decodeAuthBasic (headerContent) {
     try {
         const [method, token ] = headerContent.split (" ");
         const tokenString = atob (token);
@@ -18,7 +18,7 @@ function decodeAuthBasic(headerContent) {
             prueba proporcionada. 
  * .throw = Define un error personalizado. Yo marco el error.*/
 
-export function authMieddleware(request, response, next) {
+export function authMiddleware (request, response, next) {
     try{
 
         const {method, username, password } = 
