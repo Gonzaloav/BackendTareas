@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Gonzaloav/BackendTareas/issues"
   },
-  "homepage": "https://github.com/Gonzaloav/BackendTareas#readme"
+  "homepage": "https://github.com/Gonzaloav/BackendTareas#readme",
+  "dependencies": {
+    "jsonschema": "^1.4.0"
+  }
 }
