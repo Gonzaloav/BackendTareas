@@ -21,13 +21,15 @@ function decodeAuthBasic(headerContent) {
 export function authMieddleware(request, response, next) {
     try{
 
-        const {method, username, password } = decodeAuthBasic (request.headers.authorization); 
+        const {method, username, password } = 
+        decodeAuthBasic (request.headers.authorization); 
 
-        if (method != "Basic") throw "Método de autorización no válido. Use Básico en su lugar."
+        if (method != "Basic") throw 
+        "Método de autorización no válido. Use Básico en su lugar.";
 
         const user = users.find (
             item => item.name === username && item.password === password
-        )
+        );      
 
         if (user ) {
             next ()
@@ -35,7 +37,7 @@ export function authMieddleware(request, response, next) {
             throw "Error en la autorización."
         }
 
-}   catch (err) {
+    } catch (err) {
         console.error (err);
         response.sendStatus (401);
         return; 
