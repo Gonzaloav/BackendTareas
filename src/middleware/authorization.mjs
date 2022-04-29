@@ -1,7 +1,7 @@
 import { users } from "../models/usersModels.mjs";
 
-/**  .split = didive un objeto tipo string en un array de cadenas mediante la separación
- de la cadena en subcadenas. */
+/**  .split = didive un objeto tipo string en un array de cadenas mediante la 
+              separación de la cadena en subcadenas. */
 
 function decodeAuthBasic(headerContent) {
     try {
@@ -10,7 +10,7 @@ function decodeAuthBasic(headerContent) {
         const [ username, password ] = tokenString.split(":");
         return { method, username, password }
     } catch (error) {
-        throw "Malformed authentication";
+        throw "Autenticación mal formada";
     }  
 }
 
@@ -42,7 +42,6 @@ export function authMieddleware(request, response, next) {
     }
 }
 
-// Crear la autorización
 /**export function authorizedMiddleware( request, response, next ){
     if ( request.headers.authorized === true ) {
         next()   }  else {   response.sendStatus(401)    }} */
