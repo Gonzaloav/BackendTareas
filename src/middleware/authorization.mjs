@@ -24,8 +24,7 @@ export function authMiddleware (request, response, next) {
         const {method, username, password } = 
         decodeAuthBasic (request.headers.authorization); 
 
-        if (method != "Basic") throw 
-        "Método de autorización no válido. Use Básico en su lugar.";
+        if (method != "Basic") throw "Método de autorización no válido. Use Básico, en su lugar.";
 
         const user = users.find (
             item => item.name === username && item.password === password
