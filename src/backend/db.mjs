@@ -2,7 +2,7 @@ import sqlite3 from 'sqlite3';
 
 const db = new sqlite3.Database('./tasks.db', (err) => {
     if (err) {
-        console.error(err.message);
+        throw err.message;
     }
     console.log('Conencta el proyecto de tareas con la base de datos');
 });
@@ -22,9 +22,9 @@ db.run(`
         IF NOT EXISTS
        tasks (
             id INTEGER PRIMARY KEY,
-            description INTEGER NOT NULL,
-            done TEXT NOT NULL,
-            FOREIGN KEY ( description )
+            description VARCHAR NOT NULL,
+            done BOOLEAN NOT NULL,
+            FOREIGN KEY ( id_user )
                 REFERENCES users (id) 
                     ON DELETE CASCADE 
                     ON UPDATE NO ACTION
