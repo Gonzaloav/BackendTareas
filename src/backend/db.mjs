@@ -23,13 +23,18 @@ db.run(`
        tasks (
             id INTEGER PRIMARY KEY,
             description VARCHAR NOT NULL,
-            done BOOLEAN NOT NULL,
-            FOREIGN KEY ( id_user )
-                REFERENCES users (id) 
-                    ON DELETE CASCADE 
-                    ON UPDATE NO ACTION
+            done BOOLEAN DEFAULT false NOT NULL,
         )
 `);
+
+/* En caso de varios usuarios 
+db.run(`     CREATE TABLE        IF NOT EXISTS       tasks (
+ id INTEGER PRIMARY KEY,         description VARCHAR(100) NOT NULL,
+done BOOLEAN DEFAULT false NOT NULL,        id_user INTEGER NOT NULL,
+FOREIGN KEY ( id_user )          REFERENCES users (id) 
+ON DELETE CASCADE               ON UPDATE CASCADE   )   `);     
+
+
 
 export function sqlCallback (error, data) {
     console.log("error:", error, "data:", data);
@@ -87,7 +92,7 @@ export function getLastMessages (minutes, callback) {
         `,
         callback
     )
-}
+}*/
 
 
 export default db;

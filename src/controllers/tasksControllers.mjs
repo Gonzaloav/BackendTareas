@@ -1,13 +1,30 @@
 import { tasks } from "../models/tasksModels.mjs"
+import { db} from "../backend/db.mjs"
 
-/**  req o request = Recibo respuesta;    Res o response = Recibo respesta. 
-* SendStatus = Establece el estado y lo envía a la cliente. 
-               Cuando recibo la respuesta requerida.
-* try =  define un bloque de código para ejecutar (para probar.)
-* Catch = Define un bloque de código para manejar cualquier error. 
-* .find = Devuelve el valor del primer elemento del array que cumple la función 
+/** Para Unificar la base de datos. 
+ *  req o request = Recibo respuesta;    Res o response = Recibo respesta. 
+*   SendStatus = Establece el estado y lo envía a la cliente. 
+                 Cuando recibo la respuesta requerida. */
+
+export function getAllTaskscontroller (request, response) {
+    db.all(
+        'SELECT id, description, done FROM tasks',
+       (err, data) => {
+           if ( err ) {
+               console.error (err);
+               response.sendStatus (500).send ('Error del servidor');
+           } else {
+               response.json (data);
+           }
+       } 
+    )    
+}
+
+/** try =  define un bloque de código para ejecutar (para probar.)
+*   Catch = Define un bloque de código para manejar cualquier error. 
+*   .find = Devuelve el valor del primer elemento del array que cumple la función 
           de prueba proporcionada. 
-* parseInt = Convierte un argumento de tipo cadena y devuelve un entero de la 
+*   parseInt = Convierte un argumento de tipo cadena y devuelve un entero de la 
              base especificada.*/
 
 export function getOneTaskController(request, response) {
@@ -22,16 +39,16 @@ export function getOneTaskController(request, response) {
     }
 }
 
-export function getAllTaskController (request, response) {
+/**export function getAllTaskController (request, response) {
     try{
          response.json(tasks).send ('Hola Mundo');
     } catch (err) {
         console.error(err);
         response.sendStatus (500).send ('Error del servidor');
     }
-}
+} */
 
-/** El id no lo tenemos. Lo creamos en el momento ( id: Date.now) */
+/** El id no lo tenemos. Lo creamos en el momento ( id: Date.now) 
 
 export function postTaskController (request, response) {
     try {
@@ -41,7 +58,24 @@ export function postTaskController (request, response) {
             console.error(err);
             response.sendStatus (500).send ('Error del servidor'); 
     }
-} 
+} */
+
+/** Para unificar la base de datos. */
+
+export function postTaskController (request, response) {
+    const { description, done } = request.body;
+    db.run (
+        `INSERT INTO tasks (description, done) VALUES ("${description}", ${done})`,
+        (err) => {
+            if (err) {
+                console.error (err);
+                response.sendStatus (500).send ('Error del servidor');
+            } else {
+                response.sendStatus (201).send ('Hola Mundo');
+            }
+        }
+    )   
+}
 
 /** findIndex = Devuelve el índice del primer elemento de un array que cumpla  con 
               la función de prueba proporcionada. En caso contrario devuelve -1.*/
