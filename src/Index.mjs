@@ -23,11 +23,12 @@ const PATH_PREFIX = "http://Localhost:3000/api/v0.0/";
 try {
 const jsonParser = (express.json())  // express.json no es necesario en GET 
 
+app.use (requestLog);
 
 /** app.post ("/api/v0.0/users/", (request, response)=>{
  *  users.push (request.body);   response.sendStatus (201); })   */
 
-app.post (PATH_PREFIX + "/users/", authMiddleware, jsonParser, validateUserJSON, postTaskController);
+app.post (PATH_PREFIX + "/users/", authMiddleware, jsonParser, validateUserJSON, postUserController);
 
 /**app.get("/api/v0.0/tasks/",(request, response)=>{
     response.json(tasks)})  */
@@ -58,7 +59,7 @@ app.delete("/api/v0.0/task/", authMiddleware, jsonParser, validateDeleteTaskJSON
 
 
 app.listen(PORT,()=>{
-    console.log("Express running...");
+    console.log("Express funcionando...");
 });
 
 } catch (err) {
