@@ -7,15 +7,6 @@ const db = new sqlite3.Database('./tasks.db', (err) => {
     console.log('Conencta el proyecto de tareas con la base de datos');
 });
 
-db.run(`
-    CREATE TABLE
-        IF NOT EXISTS
-        users(
-            id INTEGER PRIMARY KEY,
-            name TEXT NOT NULL,
-            password TEXT NOT NULL
-        )
-`);
 
 db.run(`
     CREATE TABLE
@@ -26,6 +17,17 @@ db.run(`
             done BOOLEAN DEFAULT false NOT NULL,
         )
 `);
+
+/** Tabla para usuarios. 
+ * db.run(`
+    CREATE TABLE
+        IF NOT EXISTS
+        users(
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            password TEXT NOT NULL
+        )
+`);*/
 
 /* En caso de varios usuarios 
 db.run(`     CREATE TABLE        IF NOT EXISTS       tasks (
